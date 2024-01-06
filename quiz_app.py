@@ -6,8 +6,12 @@ def main():
     # TODO: your code here
 
     # 1. Get the command line arguments via sys.argv
-
+    sys.argv
+    arguments = sys.argv[1]
+    num_question=sys.argv[2]
+    
     # 2. Open the correct file open(rf'questions\<filename>.txt)'
+
 
     # 3. Iterate over the file
 

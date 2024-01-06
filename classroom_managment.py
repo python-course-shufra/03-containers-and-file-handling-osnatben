@@ -33,40 +33,71 @@ classroom = [
     },
 ]
 
-
+def find_student_index(name):
+    for index, student in enumerate(classroom):
+        if student['name'] == name:
+            return index
+    return -1 
+index = find_student_index('Charlie')
+print(index)
 def add_student(name, email=None):
-    """Add a new student to the classroom
-    with the following keys:
-    'name': the given name
-    'email': if email is given use it otherwise use <name>@example.com
-             in lowercase, you can use the `s.lower()` method
-    'grade': initialize with empty list
-    """
+    if email is None:
+        email = f"{name.lower()}@example.com"
+
+    new_student = {
+        'name': name,
+        'email': email,
+        'grades': []
+    }
+
+    classroom.append(new_student)
+
     pass
 
 
 def delete_student(name):
-    """Delete a student from the classroom"""
+    index = find_student_index(name)
+    if index != -1:
+        del classroom[index]
     pass
 
 
+
 def set_email(name, email):
-    """Sets the email of the student"""
+    index = find_student_index(name)
+    if index != -1:
+        email[index]['email'] = email
     pass
 
 
 def add_grade(name, profession, grade):
-    """Adds a new grade to the student grades"""
+    index = find_student_index(name)
+    if index != -1:
+        classroom[index]['grades'].append((profession, grade))
+   
     pass
 
 
 def avg_grade(name, profession):
-    """Returns the average of grades of the student
-    in the specified profession
-    """
+    index = find_student_index(name)
+    sum=count=0
+    if index != -1:          
+        for _, grade in student['grades']:
+            sum+=(grade)
+            count += 1
+    average = sum(sum) / count
+    return average
+
     pass
 
 
 def get_professions(name):
-    """Returns a list of unique professions that student has grades in"""
+    professions = set()
+
+    for student in classroom:
+        if student['name'] == name:
+            for subject, _ in student['grades']:
+                professions.add(subject)
+
+    return list(professions)
     pass
