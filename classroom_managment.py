@@ -38,8 +38,8 @@ def find_student_index(name):
         if student['name'] == name:
             return index
     return -1 
-index = find_student_index('Charlie')
-print(index)
+
+
 def add_student(name, email=None):
     if email is None:
         email = f"{name.lower()}@example.com"
@@ -52,20 +52,16 @@ def add_student(name, email=None):
 
     classroom.append(new_student)
 
-    pass
 
 
-def delete_student(name):
-    index = find_student_index(name)
-    if index != -1:
-        del classroom[index]
-    pass
+def delete_student(name):       
+    del classroom[find_student_index(name)]
+    
 
 
 
 def set_email(name, email):
-    index = find_student_index(name)
-    if index != -1:
+    if email is None:
         email[index]['email'] = email
     pass
 
@@ -79,25 +75,23 @@ def add_grade(name, profession, grade):
 
 
 def avg_grade(name, profession):
-    index = find_student_index(name)
-    sum=count=0
-    if index != -1:          
-        for _, grade in student['grades']:
-            sum+=(grade)
-            count += 1
-    average = sum(sum) / count
-    return average
+    
+    sum,count=0,0
+    index = find_student_index(name)       
+    for prop, grade in classroom[index]['grades']:
+        sum+=(grade)
+        count += 1    
+    return sum / count
 
     pass
 
 
 def get_professions(name):
-    professions = set()
+    index = find_student_index(name)
+    l=[]
+    for prop,_ in classroom[index]['grades']:
+        if prop not in l:
+            l.append(prop)
 
-    for student in classroom:
-        if student['name'] == name:
-            for subject, _ in student['grades']:
-                professions.add(subject)
-
-    return list(professions)
-    pass
+    return l
+    
