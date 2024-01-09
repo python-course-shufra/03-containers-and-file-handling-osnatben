@@ -61,7 +61,8 @@ def delete_student(name):
 
 
 def set_email(name, email):
-    if email is None:
+    index = find_student_index(name)
+    if index != -1:
         email[index]['email'] = email
     pass
 
@@ -76,11 +77,13 @@ def add_grade(name, profession, grade):
 
 def avg_grade(name, profession):
     
-    sum,count=0,0
+    sum=0
+    count=0
     index = find_student_index(name)       
     for prop, grade in classroom[index]['grades']:
-        sum+=(grade)
-        count += 1    
+        if prop==profession:
+            sum+=(grade)
+            count += 1    
     return sum / count
 
     pass
