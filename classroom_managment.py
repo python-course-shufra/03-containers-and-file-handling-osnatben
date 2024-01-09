@@ -63,7 +63,7 @@ def delete_student(name):
 def set_email(name, email):
     index = find_student_index(name)
     if index != -1:
-        email[index]['email'] = email
+        classroom[index]['email'] = email
     pass
 
 
